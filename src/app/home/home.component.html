@@ -1,0 +1,101 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<h1>
+    <i class="bi bi-person-lines-fill"></i>
+    Phone Book Application
+
+</h1>
+
+<br><br>
+<div >
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <h3 style='margin-right:1100px'>Contacts</h3>
+        <button (click)="toggleClick()" type="button" class="btn btn-primary">+ Add Contact</button>
+    </div>
+</div>
+<br><br>
+<div class="input-group">
+    <input type="text" name="searchtext" [(ngModel)]="text" class="form-control rounded" placeholder="Search" aria-label="Search"
+      aria-describedby="search-addon" />
+    <button (click)="search()" type="button" class="btn btn-outline-primary">search</button>
+    <button (click)="sortUp()" class="btn btn-delete phonestyle"><i class="fa fa-sort-up"></i></button>
+    <button (click)="sortDown()" class="btn btn-delete phonestyle"><i class="fa fa-sort-down"></i></button>
+
+  </div>
+
+  <div>
+    <div class="display" *ngFor="let t of tempphonebook;">
+
+  </div>
+<div *ngIf="isAdd" class="p-4 display">
+<form action="" #prodForm="ngForm"(ngSubmit)=saveContact(prodForm)>
+    <table>
+        <tr>
+            <td>
+                <label for="firstname" >First Name</label>
+            </td>
+            <td>
+                <input type="text" name="firstname" ngModel required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="lastname" >Last Name</label>
+            </td>
+            <td>
+                <input type="text" name="lastname" ngModel required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="phonenumber" >Phone Number</label>
+            </td>
+            <td>
+                <input type="text" name="phonenumber" ngModel required>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button [disabled]="!prodForm.valid">Submit</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</div>
+
+<br>
+
+<div class="display"  *ngFor="let p of phonebook;let i=index">
+
+    <br>
+    <div *ngIf="!todisplay">
+        <h3>{{p.firstname }} {{p.lastname}}</h3>
+        <div>
+            <div>
+                <i class="bi bi-telephone-fill phonestyle"></i>
+                 <p style='margin-right:20px'class="phonestyle">{{p.phonenumber}}</p>
+              <button (click)="deleteContact(i)" class="btn btn-delete phonestyle"><i class="fa fa-trash"></i></button>
+              <button (click)="editContact()" class="btn btn-delete phonestyle"><i class="fa fa-edit"></i></button>
+            </div>
+
+                        
+
+        </div>
+        
+    </div>
+   
+</div>
+
+<div class="display" *ngFor="let t of tempphonebook;let i=index ">
+    <h3>{{t.firstname}}  {{t.lastname}}</h3>
+    <div>
+        <div>
+            <i class="bi bi-telephone-fill phonestyle"></i>
+             <p style='margin-right:20px'class="phonestyle">{{t.phonenumber}}</p>
+          <button (click)="deleteContact(i)" class="btn btn-delete phonestyle"><i class="fa fa-trash"></i></button>
+          <button (click)="editContact()" class="btn btn-delete phonestyle"><i class="fa fa-edit"></i></button>
+        </div>
+    </div>
+
+</div>
+
